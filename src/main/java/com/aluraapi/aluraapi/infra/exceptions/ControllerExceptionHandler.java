@@ -1,4 +1,4 @@
-package com.aluraapi.aluraapi.infra;
+package com.aluraapi.aluraapi.infra.exceptions;
 
 import com.aluraapi.aluraapi.dtos.ExceptionDTO;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,6 +14,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity treatDuplicationEntry (DataIntegrityViolationException e){
         ExceptionDTO exceptionDTO = new ExceptionDTO("Usuário já cadastrado", String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
+
+    @ExceptionHandler(AlreadyRegisteredUserException.class)
+    public ResponseEntity treatDuplicationEntry (AlreadyRegisteredUserException e){
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Já existe uma inscrição para este usuário neste curso", String.valueOf(HttpStatus.BAD_REQUEST.value()));
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 

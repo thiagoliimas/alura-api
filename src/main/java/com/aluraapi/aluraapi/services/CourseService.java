@@ -48,6 +48,10 @@ public class CourseService {
         return this.repository.findCourseByCode(code).orElseThrow(EntityNotFoundException::new);
     }
 
+    public Course findCourseById(Long id){
+        return this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
     public void disableCourse(String code) {
         Optional<Course> course = Optional.ofNullable(this.findCourseByCode(code));
 
