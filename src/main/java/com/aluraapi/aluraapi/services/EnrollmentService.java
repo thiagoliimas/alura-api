@@ -32,11 +32,13 @@ public class EnrollmentService {
         User user = this.userService.findUserById(enrollmentDTO.userId());
         Course course = this.courseService.findCourseById(enrollmentDTO.courseId());
         try{
+
             if(course.getStatus() == StatusEnum.ACTIVE){
                 Enrollment enrollment = new Enrollment(user, course, enrollmentDTO.registrationDate());
                 this.saveEnrollment(enrollment);
                 return enrollment;
             } else throw new InactiveCourseException();
+
         } catch (DataIntegrityViolationException ex) {
             throw new AlreadyRegisteredUserException();
         }
