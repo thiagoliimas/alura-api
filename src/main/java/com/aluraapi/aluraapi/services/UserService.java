@@ -4,7 +4,9 @@ import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.CourseDTO;
 import com.aluraapi.aluraapi.dtos.UserDTO;
 import com.aluraapi.aluraapi.infra.RoleEnum;
+import com.aluraapi.aluraapi.infra.exceptions.InvalidUsernameException;
 import com.aluraapi.aluraapi.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,20 +19,20 @@ public class UserService {
     private UserRepository repository;
 
     public User findUserByUsername(String username) throws Exception {
-        return this.repository.findUserByUsername(username).orElseThrow(() -> new Exception("Usuário não encontrado"));
+        return this.repository.findUserByUsername(username).orElseThrow(EntityNotFoundException::new);
     }
 
     public User findUserById(UUID id) throws Exception {
-        return this.repository.findById(id).orElseThrow(() -> new Exception("Usuário não encontrado"));
+        return this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public void save(User user){
         this.repository.save(user);
     }
 
-    public User createUser (UserDTO userDTO) throws Exception {
+    public User createUser (UserDTO userDTO) throws InvalidUsernameException {
         if(!userDTO.username().matches("^[a-z]+$")){
-            throw new Exception("Username deve conter apenas caracteres minúsculos, sem numerais e sem espaços");
+            throw new InvalidUsernameException();
         }
         User newUser = new User(userDTO);
         this.save(newUser);
