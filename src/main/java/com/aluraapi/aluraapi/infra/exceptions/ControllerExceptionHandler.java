@@ -13,13 +13,29 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity treatDuplicationEntry (DataIntegrityViolationException e){
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Usuário já cadastrado", String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Já existe registro na base",
+                String.valueOf(HttpStatus.BAD_REQUEST.value()));
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
     @ExceptionHandler(AlreadyRegisteredUserException.class)
     public ResponseEntity treatDuplicationEntry (AlreadyRegisteredUserException e){
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Já existe uma inscrição para este usuário neste curso", String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Já existe uma inscrição para este usuário neste curso",
+                String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
+
+    @ExceptionHandler(InactiveCourseException.class)
+    public ResponseEntity treatDuplicationEntry (InactiveCourseException e){
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Curso inativo",
+                String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
+
+    @ExceptionHandler(InvalidUsernameException.class)
+    public ResponseEntity treatDuplicationEntry (InvalidUsernameException e){
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Username deve conter apenas caracteres minúsculos, sem numerais e sem espaços",
+                String.valueOf(HttpStatus.BAD_REQUEST.value()));
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
