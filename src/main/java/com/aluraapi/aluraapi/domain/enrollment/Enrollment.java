@@ -2,15 +2,13 @@ package com.aluraapi.aluraapi.domain.enrollment;
 
 import com.aluraapi.aluraapi.domain.courses.Course;
 import com.aluraapi.aluraapi.domain.user.User;
-import com.aluraapi.aluraapi.dtos.EnrollmentDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Entity(name = "enrollment")
-@Table (name = "enrollment", uniqueConstraints={@UniqueConstraint(columnNames = {"user", "course"})})
+@Table (name = "enrollment", uniqueConstraints={@UniqueConstraint(columnNames = {"user_id", "course_id"})})
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -23,20 +21,19 @@ public class Enrollment {
     private Long id;
 
     @ManyToOne
-    @Column(nullable = false)
-    private User user;
+    @JoinColumn(nullable = false, name = "user_id")
+    private User userId;
 
     @ManyToOne
-    @Column(nullable = false)
-    private Course course;
+    @JoinColumn(nullable = false, name = "course_id")
+    private Course courseId;
 
     @Column(nullable = false)
-    @Pattern(regexp = "dd/MM/yyyy")
-    private LocalDate date;
+    private LocalDate registrationDate;
 
-    public Enrollment (User user, Course course, LocalDate date){
-        this.user = user;
-        this.course = course;
-        this.date = date;
+    public Enrollment (User userId, Course courseId, LocalDate registrationDate){
+        this.userId = userId;
+        this.courseId = courseId;
+        this.registrationDate = registrationDate;
     }
 }
