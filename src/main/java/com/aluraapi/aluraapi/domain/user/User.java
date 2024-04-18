@@ -1,11 +1,15 @@
 package com.aluraapi.aluraapi.domain.user;
 
-import com.aluraapi.aluraapi.infra.Role;
+import com.aluraapi.aluraapi.dtos.UserDTO;
+import com.aluraapi.aluraapi.infra.RoleEnum;
+import com.aluraapi.aluraapi.views.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity(name="users")
 @Table(name="users", uniqueConstraints={@UniqueConstraint(columnNames = {"email", "username"})})
@@ -17,10 +21,12 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
+    private UUID id;
 
     @Column(nullable = false)
+    @JsonView(Views.Public.class)
     private String name;
 
     @Column(unique = true, length = 20, nullable = false)
@@ -29,6 +35,7 @@ public class User {
 
     @Column(unique = true, nullable = false)
     @Email(message = "O email fornecido não é válido")
+    @JsonView(Views.Public.class)
     private String email;
 
     @Column(nullable = false)
@@ -36,8 +43,18 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    @JsonView(Views.Public.class)
+    private RoleEnum role;
 
     @Column(nullable = false)
     private LocalDateTime timestamp;
+
+    public User (UserDTO userDTO){
+        this.name = userDTO.name();
+        this.username = userDTO.username();
+        this.email = userDTO.email();
+        this.password = userDTO.password();
+        this.role = userDTO.role();
+        this.timestamp = LocalDateTime.now();
+    }
 }
