@@ -1,6 +1,6 @@
 package com.aluraapi.aluraapi.infra;
 
-public enum Role {
+public enum RoleEnum {
 
     STUDENT,
     INSTRUCTOR,
