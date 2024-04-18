@@ -6,6 +6,7 @@ import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.EnrollmentDTO;
 import com.aluraapi.aluraapi.infra.StatusEnum;
 import com.aluraapi.aluraapi.infra.exceptions.AlreadyRegisteredUserException;
+import com.aluraapi.aluraapi.infra.exceptions.InactiveCourseException;
 import com.aluraapi.aluraapi.repositories.EnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -35,10 +36,9 @@ public class EnrollmentService {
                 Enrollment enrollment = new Enrollment(user, course, enrollmentDTO.registrationDate());
                 this.saveEnrollment(enrollment);
                 return enrollment;
-            } else throw new Exception("Curso inativo");
+            } else throw new InactiveCourseException();
         } catch (DataIntegrityViolationException ex) {
             throw new AlreadyRegisteredUserException();
         }
-
     }
 }
