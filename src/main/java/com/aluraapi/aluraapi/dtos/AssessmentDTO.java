@@ -5,5 +5,5 @@ import com.aluraapi.aluraapi.domain.user.User;
 
 import java.util.UUID;
 
-public record AssessmentDTO (UUID studentId, Long courseID, Integer grade) {
+public record AssessmentDTO (Long studentId, Long courseId, Integer grade) {
 }
