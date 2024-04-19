@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,11 +19,11 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public User findUserByUsername(String username) throws Exception {
+    public User findUserByUsername(String username) {
         return this.repository.findUserByUsername(username).orElseThrow(EntityNotFoundException::new);
     }
 
-    public User findUserById(UUID id) throws Exception {
+    public User findUserById(Long id) {
         return this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
