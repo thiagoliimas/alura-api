@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EnrollmentService {
 
@@ -23,6 +25,10 @@ public class EnrollmentService {
 
     @Autowired
     private CourseService courseService;
+
+    public List<Enrollment> getAllEnrollment(){
+        return enrollmentRepository.findAll();
+    }
 
     public void saveEnrollment (Enrollment enrollment){
         this.enrollmentRepository.save(enrollment);
@@ -42,5 +48,9 @@ public class EnrollmentService {
         } catch (DataIntegrityViolationException ex) {
             throw new AlreadyRegisteredUserException();
         }
+    }
+
+    public boolean existsEnrollmentByCourseIdAndUserId(User student, Course course){
+        return this.enrollmentRepository.existsEnrollmentByCourseIdAndUserId(course, student);
     }
 }
