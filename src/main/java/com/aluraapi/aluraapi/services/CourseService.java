@@ -4,7 +4,7 @@ import com.aluraapi.aluraapi.domain.courses.Course;
 import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.CourseDTO;
 import com.aluraapi.aluraapi.dtos.StatisticsCourseDTO;
-import com.aluraapi.aluraapi.infra.StatusEnum;
+import com.aluraapi.aluraapi.domain.courses.StatusCourse;
 import com.aluraapi.aluraapi.repositories.CourseRepository;
 import com.aluraapi.aluraapi.repositories.StatisticsCoursesRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -63,12 +63,12 @@ public class CourseService {
 
     public void disableCourse(String code) {
         Course course = this.findCourseByCode(code);
-        course.setStatus(StatusEnum.INACTIVE);
+        course.setStatus(StatusCourse.INACTIVE);
         course.setTs_inactivation(LocalDateTime.now());
         this.repository.save(course);
     }
 
     public Page<Course> findCoursesByStatus(String status, Pageable pageable) {
-        return this.repository.findCoursesByStatus(StatusEnum.valueOf(status), pageable);
+        return this.repository.findCoursesByStatus(StatusCourse.valueOf(status), pageable);
     }
 }

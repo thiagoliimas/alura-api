@@ -4,7 +4,7 @@ import com.aluraapi.aluraapi.domain.courses.Course;
 import com.aluraapi.aluraapi.domain.enrollment.Enrollment;
 import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.EnrollmentDTO;
-import com.aluraapi.aluraapi.infra.StatusEnum;
+import com.aluraapi.aluraapi.domain.courses.StatusCourse;
 import com.aluraapi.aluraapi.infra.exceptions.AlreadyRegisteredUserException;
 import com.aluraapi.aluraapi.infra.exceptions.InactiveCourseException;
 import com.aluraapi.aluraapi.repositories.EnrollmentRepository;
@@ -39,7 +39,7 @@ public class EnrollmentService {
         Course course = this.courseService.findCourseById(enrollmentDTO.courseId());
         try{
 
-            if(course.getStatus() == StatusEnum.ACTIVE){
+            if(course.getStatus() == StatusCourse.ACTIVE){
                 Enrollment enrollment = new Enrollment(user, course, enrollmentDTO.registrationDate());
                 this.saveEnrollment(enrollment);
                 return enrollment;

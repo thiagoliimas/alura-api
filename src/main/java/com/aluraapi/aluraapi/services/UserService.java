@@ -3,15 +3,13 @@ package com.aluraapi.aluraapi.services;
 import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.CourseDTO;
 import com.aluraapi.aluraapi.dtos.UserDTO;
-import com.aluraapi.aluraapi.infra.RoleEnum;
+import com.aluraapi.aluraapi.domain.user.UserRole;
 import com.aluraapi.aluraapi.infra.exceptions.InvalidUsernameException;
 import com.aluraapi.aluraapi.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -21,6 +19,10 @@ public class UserService {
 
     public User findUserByUsername(String username) {
         return this.repository.findUserByUsername(username).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public UserDetails findByUsername(String username) {
+        return this.repository.findByUsername(username);
     }
 
     public User findUserById(Long id) {
@@ -37,18 +39,19 @@ public class UserService {
         }
         User newUser = new User(userDTO);
         this.save(newUser);
+        newUser.setPassword("*****");
         return newUser;
     }
 
     public void isInstructor(User user) throws Exception {
-        if(user.getRole() != RoleEnum.INSTRUCTOR){
+        if(user.getRole() != UserRole.INSTRUCTOR){
             throw new Exception("Usuário não é um instrutor");
         }
     }
 
     public void isAdmin(User user) throws Exception {
 
-        if(user.getRole() != RoleEnum.ADMIN){
+        if(user.getRole() != UserRole.ADMIN){
             throw new Exception("Usuário não tem autorização para prosseguir com a solicitação");
         }
     }

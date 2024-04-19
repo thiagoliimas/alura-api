@@ -2,7 +2,6 @@ package com.aluraapi.aluraapi.domain.courses;
 
 import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.CourseDTO;
-import com.aluraapi.aluraapi.infra.StatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,7 +36,7 @@ public class Course {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private StatusEnum status;
+    private StatusCourse status;
 
     @Column(nullable = false)
     private LocalDateTime ts_creation;
@@ -49,7 +48,7 @@ public class Course {
         this.code = courseDTO.code();
         this. instuctor = user;
         this.description = courseDTO.description();
-        this.status = StatusEnum.ACTIVE;
+        this.status = StatusCourse.ACTIVE;
         this.ts_creation = LocalDateTime.now();
     }
 }
