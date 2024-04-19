@@ -32,6 +32,20 @@ public class ControllerExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
+    @ExceptionHandler(UnenrolledUserException.class)
+    public ResponseEntity treatDuplicationEntry (UnenrolledUserException e){
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Aluno não matriculado neste curso",
+                String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
+
+    @ExceptionHandler(GradeOutOfBoundsException.class)
+    public ResponseEntity treatDuplicationEntry (GradeOutOfBoundsException e){
+        ExceptionDTO exceptionDTO = new ExceptionDTO("A nota deve ser de 1 a 10",
+                String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
+
     @ExceptionHandler(InvalidUsernameException.class)
     public ResponseEntity treatDuplicationEntry (InvalidUsernameException e){
         ExceptionDTO exceptionDTO = new ExceptionDTO("Username deve conter apenas caracteres minúsculos, sem numerais e sem espaços",
