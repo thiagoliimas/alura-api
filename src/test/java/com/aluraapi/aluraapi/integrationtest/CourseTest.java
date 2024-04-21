@@ -31,13 +31,13 @@ public class CourseTest {
     CourseRepository courseRepository;
 
     @Test
-    @DisplayName("Should return successfully when searching for user by username")
+    @DisplayName("Should return success when deactivating a course")
     public void disableCourseSuccess() throws Exception {
 
         User user = userRepository.save(new User(new UserDTO(
-                "Paulo",
-                "paulosilva",
-                "paulo@outlook.com",
+                "Thais",
+                "thaislima",
+                "thais@outlook.com",
                 "abc123",
                 UserRole.INSTRUCTOR)));
 
