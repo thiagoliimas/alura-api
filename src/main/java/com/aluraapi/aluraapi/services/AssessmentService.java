@@ -6,13 +6,10 @@ import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.AssessmentDTO;
 import com.aluraapi.aluraapi.infra.exceptions.GradeOutOfBoundsException;
 import com.aluraapi.aluraapi.infra.exceptions.UnenrolledUserException;
-import com.aluraapi.aluraapi.notification.EmailSender;
 import com.aluraapi.aluraapi.notification.UnsatisfactoryAssessmentNotification;
 import com.aluraapi.aluraapi.repositories.AssessmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.management.Notification;
 
 @Service
 public class AssessmentService {

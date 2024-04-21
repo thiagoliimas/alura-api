@@ -1,9 +1,9 @@
 package com.aluraapi.aluraapi.services;
 
 import com.aluraapi.aluraapi.domain.user.User;
+import com.aluraapi.aluraapi.domain.user.UserRole;
 import com.aluraapi.aluraapi.dtos.CourseDTO;
 import com.aluraapi.aluraapi.dtos.UserDTO;
-import com.aluraapi.aluraapi.domain.user.UserRole;
 import com.aluraapi.aluraapi.infra.exceptions.InvalidUsernameException;
 import com.aluraapi.aluraapi.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,13 +46,6 @@ public class UserService {
     public void isInstructor(User user) throws Exception {
         if(user.getRole() != UserRole.INSTRUCTOR){
             throw new Exception("Usuário não é um instrutor");
-        }
-    }
-
-    public void isAdmin(User user) throws Exception {
-
-        if(user.getRole() != UserRole.ADMIN){
-            throw new Exception("Usuário não tem autorização para prosseguir com a solicitação");
         }
     }
 

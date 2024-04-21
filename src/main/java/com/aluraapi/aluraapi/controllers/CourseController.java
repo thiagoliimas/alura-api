@@ -21,8 +21,8 @@ public class CourseController {
     private CourseService service;
 
     @GetMapping("/statistics")
-    public List<StatisticsCourseDTO> courseRanking (){
-        return service.courseRanking();
+    public ResponseEntity<List<StatisticsCourseDTO>> courseRanking (){
+        return new ResponseEntity<>(service.courseRanking(), HttpStatus.OK);
     }
 
     @GetMapping

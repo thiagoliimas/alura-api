@@ -1,10 +1,10 @@
 package com.aluraapi.aluraapi.services;
 
 import com.aluraapi.aluraapi.domain.courses.Course;
+import com.aluraapi.aluraapi.domain.courses.StatusCourse;
 import com.aluraapi.aluraapi.domain.enrollment.Enrollment;
 import com.aluraapi.aluraapi.domain.user.User;
 import com.aluraapi.aluraapi.dtos.EnrollmentDTO;
-import com.aluraapi.aluraapi.domain.courses.StatusCourse;
 import com.aluraapi.aluraapi.infra.exceptions.AlreadyRegisteredUserException;
 import com.aluraapi.aluraapi.infra.exceptions.InactiveCourseException;
 import com.aluraapi.aluraapi.repositories.EnrollmentRepository;

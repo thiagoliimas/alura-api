@@ -2,10 +2,8 @@ package com.aluraapi.aluraapi.domain.assessment;
 
 import com.aluraapi.aluraapi.domain.courses.Course;
 import com.aluraapi.aluraapi.domain.user.User;
-import com.aluraapi.aluraapi.dtos.AssessmentDTO;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Internal;
 import org.hibernate.validator.constraints.Range;
 
 
