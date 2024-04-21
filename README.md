@@ -13,7 +13,7 @@
 - [x] Buscar todos os cursos
 - [x] Buscar curso por status
 - [X] Desabilitar um curso (acesso somente para Administradores)
-- [x] Estatística dos cursos (Os curso com mais de 4 matriculas serão exibidos mostrando a quantidade de matriculas e a media das avaliaçções)
+- [x] Estatística dos cursos (Os curso com mais de 3 matriculas serão exibidos mostrando a quantidade de matriculas e a media das avaliaçções)
 ###
 - [X] Matricular aluno em curso (Cada aluno pode se matricular no mesmo curso apenas uma vez)
 ###
